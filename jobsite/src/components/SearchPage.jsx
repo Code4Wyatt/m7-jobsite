@@ -1,48 +1,59 @@
-import React, { useState } from "react"
-import { Form, Container, Row, Col } from "react-bootstrap"
-import axios from "axios"
-import uniqid from "uniqid"
-import Job from "../components/Job"
+import { Component } from 'react'
+import { Container, Row, Col, Form } from 'react-bootstrap'
+import Job from './Job'
+import uniqid from 'uniqid'
 
-function SearchPage() {
-  const [ query, setQuery ] = useState('')
-  const [ jobs, setJobs ] = useState([])
+class SearchPage extends Component {
 
-  const handleChange = (e) => {
-    setQuery(e.target.value)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const response = await axios.get('https://strive-jobs-api.herokuapp.com/jobs?search=' + query)
-
-    if (!response.ok) {
-      alert('No jobs found')
-      return
+    state = {
+        query: '',
+        jobs: []
     }
 
-    const { data } = await response.json()
-    setJobs(data)
-  }
+    baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
 
-  return (
-    <Container>
-      <Row>
-        <Col xs={10} className='mx-auto my-3'>
-          <h1>Search Remote Jobs</h1>
-        </Col>
-        <Col xs={10} className='mx-auto'>
-          <Form onSubmit={handleSubmit()}>
-            <Form.Control type="search" value={query} onChange={handleChange()} placeholder="Enter role and press enter" />
-          </Form>
-        </Col>
-        <Col xs={10} className='mx-auto mb-5'>
-          {jobs?.map(job => <Job key={uniqid()} data={job} />)}
-        </Col>
-      </Row>
-    </Container>
-  );
+
+    handleChange = (e) => {
+        this.setState({ query: e.target.value })
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const response = await fetch(this.baseEndpoint + this.state.query + '&limit=20')
+
+        if (!response.ok) {
+            alert('Error fetching results')
+            return
+        }
+
+        const { data } = await response.json()
+
+        this.setState({ jobs: data })
+
+    }
+
+    render() {
+        return (
+            <Container>
+                <Row>
+                    <Col xs={10} className='mx-auto my-3'>
+                        <h1>Remote Jobs Search</h1>
+                    </Col>
+                    <Col xs={10} className='mx-auto'>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Control type="search" value={this.state.query} onChange={this.handleChange} placeholder="type and press Enter" />
+                        </Form>
+                    </Col>
+                    <Col xs={10} className='mx-auto mb-5'>
+                        {
+                            this.state.jobs.map(jobData => <Job key={uniqid()} data={jobData} />)
+                        }
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
 }
 
-export default SearchPage;
+export default SearchPage
