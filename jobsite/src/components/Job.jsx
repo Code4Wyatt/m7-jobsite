@@ -3,7 +3,6 @@ import { Card, Button } from 'react-bootstrap'
 import { addToFavouritesAction } from '../redux/actions/index.js'
 import { connect } from 'react-redux'
 
-
 const mapStateToProps = state => ({
   username: state.user.username
 })
@@ -14,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-const Job = ({ data, addToFavouritesAction, company }) => {
+const Job = ({ data, addToFavourites, company }) => {
   return(
     <Card style={{ width: '18rem' }}>
     <Card.Body>
@@ -24,7 +23,7 @@ const Job = ({ data, addToFavouritesAction, company }) => {
       {data.publication_date}
       </Card.Text>
       <Card.Text href="#">{data.candidate_required_location}</Card.Text>
-      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => addToFavouritesAction(company)} className="ml-5" variant="primary">✰</Button>
+      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => {addToFavourites(data)}} className="ml-5" variant="primary">✰</Button>
     </Card.Body>
   </Card>
       

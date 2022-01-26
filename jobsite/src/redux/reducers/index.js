@@ -8,7 +8,7 @@ const favouriteReducer = ( state = initialState, action ) => {
                 ...state,
                 favourites: {
                     ...state.favourites,
-                    companies: [...state.favourites.companies, action.payload],
+                    jobs: [...state.favourites.jobs, action.payload],
                 },
             }
 
@@ -17,7 +17,7 @@ const favouriteReducer = ( state = initialState, action ) => {
                 ...state,
                 favourites: {
                     ...state.favourites,
-                    favourites: state.favourites.companies.filter((book, i) => i !== action.payload)
+                    favourites: state.favourites.jobs.filter((job, i) => i !== action.payload)
                 },
             }
 
