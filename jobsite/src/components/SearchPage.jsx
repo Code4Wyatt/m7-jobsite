@@ -42,7 +42,7 @@ class SearchPage extends Component {
                     </Col>
                     <Col xs={10} className='mx-auto'>
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Control type="search" value={this.state.query} onChange={this.handleChange} placeholder="type and press Enter" />
+                            <Form.Control type="search" value={this.state.query} onChange={this.handleChange} placeholder="Type and press enter" />
                         </Form>
                     </Col>
                     <Col xs={10} className='mx-auto mb-5'>

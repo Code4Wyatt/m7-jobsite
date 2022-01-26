@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
+import { addToFavouritesAction } from '../redux/actions'
 
-const Job = ({ data }) => {
+const Job = ({ data, addToFavouritesAction, company }) => {
   return(
     <Card style={{ width: '18rem' }}>
     <Card.Body>
@@ -11,7 +12,7 @@ const Job = ({ data }) => {
       {data.publication_date}
       </Card.Text>
       <Card.Text href="#">{data.candidate_required_location}</Card.Text>
-      <Card.Link href="/:job">View Job</Card.Link>
+      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => {addToFavouritesAction(company)}} className="ml-5" variant="primary">✰</Button>
     </Card.Body>
   </Card>
       
