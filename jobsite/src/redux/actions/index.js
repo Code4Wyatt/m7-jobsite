@@ -12,7 +12,21 @@ export const removeFromFavouritesAction = (index) => ({
     payload: index,
 })
 
-export const setUsernameAction = (name) => ({
-    type: SET_USERNAME,
-    payload: name,
-})
+export const fetchJobs = (url, query) => {
+    return async (dispatch, getState) => {
+        try {
+            let resp = await fetch(url + query + '$limit=30')
+            if (resp.ok) {
+                const { datat } = await resp.json()
+                dispath({
+                    type: "FETCH_JOBS",
+                    payload: data,
+                });
+            } else {
+                console.log("error")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
