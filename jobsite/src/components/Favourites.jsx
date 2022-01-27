@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button"
 import { StarFill } from 'react-bootstrap-icons'
 import { Col, Row } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { removeFromFavouritesAction } from "../redux/actions"
+import { removeFromFavouritesAction } from "../redux/actions/index.js"
 
 const mapStateToProps = (state) => ({
   favourites: state.favourites.jobs
@@ -15,14 +15,14 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-const FavouritesPage = ({ favourites, removeFromFavourites}) => (
+const FavouritesPage = ({ favourites, removeFromFavourites, jobs}) => (
   <Row>
     <Col sm={12}>
       <ul style={{ listStyle: "none" }}>
-        {favourites.map((favourite, i) => (
-          <li key={i} className="my-4">
-                <StarFill onClick={() => removeFromFavourites(i)} />
-                <span>{i}</span>
+        {jobs.map(f => (
+          <li key={f} className="my-4">
+                <StarFill onClick={() => removeFromFavourites(f)} />
+                <span>{f}</span>
           </li>
         ))}
       </ul>

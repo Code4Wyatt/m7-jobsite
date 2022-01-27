@@ -4,9 +4,12 @@ import SearchResults from "./components/SearchResults"
 import Favourites from "./components/Favourites"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Provider } from "react-redux"
+import store from "../src/redux/store/index.js";
 
 function App () {
   return (
+    <Provider store={store}>
     <BrowserRouter>
      
        <NavBar /> 
@@ -17,6 +20,7 @@ function App () {
           <Route path="/favourites" element={<Favourites />}/>
           </Routes>
     </BrowserRouter>
+    </Provider>
   )
 }
 
