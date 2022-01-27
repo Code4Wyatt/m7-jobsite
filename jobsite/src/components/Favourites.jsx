@@ -1,35 +1,33 @@
-import Button from "react-bootstrap/Button";
-import { FaTrash } from "react-icons/fa";
-import { Col, Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button"
+import { StarFill } from 'react-bootstrap-icons'
+import { Col, Row } from "react-bootstrap"
 import { connect } from 'react-redux'
-import { removeFromFavouritesAction } from "../redux/actions";
+import { removeFromFavouritesAction } from "../redux/actions"
 
 const mapStateToProps = (state) => ({
-  favourites: state.favourites.companies
+  favourites: state.favourites.jobs
 })
 
 const mapDispatchToProps = (dispatch) => ({
     removeFromFavourites: (index) => {
-    console.log('Company index is', index)
+    console.log('Job removed: ', index)
     dispatch(removeFromFavouritesAction(index))
   }
 })
 
-const FavouritesPage = ({ companies, removeFromFavourites }) => (
+const FavouritesPage = ({ favourites, removeFromFavourites}) => (
   <Row>
     <Col sm={12}>
       <ul style={{ listStyle: "none" }}>
-        {companies.map((company, i) => (
+        {favourites.map((favourite, i) => (
           <li key={i} className="my-4">
-            <Button variant="danger" onClick={() => removeFromFavourites(i)}>
-              <FaTrash />
-            </Button>
-            {company.title}
+                <StarFill onClick={() => removeFromFavourites(i)} />
+                <span>{i}</span>
           </li>
         ))}
       </ul>
     </Col>
   </Row>
-);
+)
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavouritesPage);
+export default connect(s => s, mapDispatchToProps)(FavouritesPage)

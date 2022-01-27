@@ -10,9 +10,7 @@ const SearchResults = () => {
   const [jobs, setJobs] = useState([])
   const params = useParams()
 
-  useEffect(() => {
-    getJobs()
-  }, [])
+  
 
   const getJobs = async () => {
     try {
@@ -24,6 +22,10 @@ const SearchResults = () => {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    getJobs()
+  }, [])
 
   return (
     <Container>
