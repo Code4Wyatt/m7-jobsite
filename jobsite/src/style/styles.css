@@ -1,6 +1,7 @@
-li:hover {
-    background-color: blue;
+.card:hover {
+    background-color: rgb(131, 172, 224);
     justify-content: space-between;
+    border: 1px black solid;
 }
 
 span {
@@ -15,6 +16,11 @@ span {
 
 Navbar {
     background-color: red !important;
+}
+
+.app {
+    background-image: url("https://www.surveylegend.com/wordpress/wp-content/uploads/2021/02/happy-employees.png");
+    max-height: 100vh;
 }
 
 

@@ -14,12 +14,13 @@ function App () {
     <BrowserRouter>
      
        <NavBar /> 
-       
+        <div className="app">
           <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route path="/:companyName" element={<SearchResults/>}/>
           <Route path="/favourites" element={<Favourites />}/>
           </Routes>
+          </div>
     </BrowserRouter>
     </Provider>
   )

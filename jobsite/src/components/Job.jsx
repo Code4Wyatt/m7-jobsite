@@ -6,7 +6,7 @@ import {
   Heart,
   HeartFill,
 } from "react-bootstrap-icons"
-
+import "../style/styles.css"
 
 // const mapDispatchToProps = (dispatch) => ({
 //   addToFavourites: (company) => {
