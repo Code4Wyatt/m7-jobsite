@@ -8,7 +8,7 @@ const NavBar = () => {
   const favourites = useSelector((state) => state.favourites.elements);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" expand="lg" variant="dark">
       <Container fluid>
         <Navbar.Brand href="/">RemoteIT</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -23,7 +23,7 @@ const NavBar = () => {
               Favourites <Badge bg="secondary">{favourites.length}</Badge>
   
             </Nav.Link>
-            <Nav.Link className="contactNav" href="#" disabled>
+            <Nav.Link className="contactNav" href="/">
               Contact Us
             </Nav.Link>
           </Nav>

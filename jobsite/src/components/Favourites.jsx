@@ -29,7 +29,7 @@ const FavouritesPage = () => {
       <Col sm={12}>
         <ul style={{ listStyle: "none" }}>
           {favourites.map((favourite, i) => (
-            <Card>
+            <Card className="m-5">
             <Card.Header>{favourite.category}</Card.Header>
             <Card.Body>
               <Card.Title>{favourite.title}</Card.Title>
@@ -42,7 +42,8 @@ const FavouritesPage = () => {
               <Card.Text>
               <div dangerouslySetInnerHTML={{__html: favourite["description"]}}></div>
               </Card.Text>
-              <Button variant="primary">Apply</Button>
+              <Button variant="primary" className="mr-2">Apply</Button>
+              <Button variant="warning" onClick={() => dispatch(removeFromFavouritesAction(favourite))}>Remove Favourite</Button>
             </Card.Body>
           </Card>
 

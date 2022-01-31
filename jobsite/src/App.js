@@ -3,9 +3,10 @@ import SearchPage from "./components/SearchPage"
 import SearchResults from "./components/SearchResults"
 import Favourites from "./components/Favourites"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Provider } from "react-redux"
-import { configureStore } from "../src/redux/store/index.js";
+import { configureStore } from "../src/redux/store/index.js"
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 function App () {
   return (

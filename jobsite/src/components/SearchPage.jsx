@@ -38,7 +38,7 @@ const SearchPage = () => {
     //     jobs: []
     // }
 
-    const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+    const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?title='
 
 
     const handleChange = (e) => {
@@ -55,7 +55,7 @@ const SearchPage = () => {
 
 
         return (
-            <Container>
+            <Container className="searchPage">
                 <Row>
                     <Col xs={10} className='mx-auto my-3'>
                         <h1>Remote Jobs Search</h1>
