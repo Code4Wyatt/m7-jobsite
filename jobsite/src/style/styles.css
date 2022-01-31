@@ -7,3 +7,8 @@ span {
     margin-left: 10px;
     margin-right: 20px;
 }
+
+.contactNav {
+    position: absolute;
+    right: 20px;
+}

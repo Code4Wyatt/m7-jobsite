@@ -21,13 +21,7 @@ const Job = ({ data, addToFavourites }) => {
   const jobData = useSelector(state => state.jobs.elements)
   const favourited = useSelector(state => state.favourites.elements)
 
-  useEffect(
-    () =>
-      liked
-        ? props.addSong(props.selectedSong.selectedSong)
-        : props.removeSong(props.selectedSong.selectedSong),
-    [selected]
-  );
+ 
   const dispatch = useDispatch()
 
   return(
@@ -39,7 +33,7 @@ const Job = ({ data, addToFavourites }) => {
       {data.publication_date}
       </Card.Text>
       <Card.Text href="#">{data.candidate_required_location}</Card.Text>
-      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => dispatch(addToFavouritesAction(data))} className="ml-5" variant="primary">{favourite ? <HeartFill /> : <Heart />}</Button>
+      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => dispatch(addToFavouritesAction(data))} className="ml-5" variant="primary">{favourited ? <HeartFill /> : <Heart />}</Button>
     </Card.Body>
   </Card> 
   )

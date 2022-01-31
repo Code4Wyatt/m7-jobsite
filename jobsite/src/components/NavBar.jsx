@@ -1,36 +1,37 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import { Nav, Form, FormControl, Container, Button } from 'react-bootstrap';
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import { Nav, Form, FormControl, Container, Button, Badge } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux"
+import "../style/styles.css"
 
-function NavBar() {
-  return <Navbar bg="light" expand="lg">
-  <Container fluid>
-    <Navbar.Brand href="/">RemoteIT</Navbar.Brand>
-    <Navbar.Toggle aria-controls="navbarScroll" />
-    <Navbar.Collapse id="navbarScroll">
-      <Nav
-        className="me-auto my-2 my-lg-0"
-        style={{ maxHeight: '100px' }}
-        navbarScroll
-      >
-        <Nav.Link href="">Home</Nav.Link>
-        <Nav.Link href="#action2">All Jobs</Nav.Link>
-        <Nav.Link href="#" disabled>
-          Contact Us
-        </Nav.Link>
-      </Nav>
-      <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>;
-}
+const NavBar = () => {
+  const favourites = useSelector((state) => state.favourites.elements);
+
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container fluid>
+        <Navbar.Brand href="/">RemoteIT</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px" }}
+            navbarScroll
+          >
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/favourites">
+              Favourites <Badge bg="secondary">{favourites.length}</Badge>
+  
+            </Nav.Link>
+            <Nav.Link className="contactNav" href="#" disabled>
+              Contact Us
+            </Nav.Link>
+          </Nav>
+          
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+};
 
 export default NavBar;
