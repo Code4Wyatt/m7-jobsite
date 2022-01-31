@@ -1,39 +1,59 @@
-import { Component } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import Job from './Job'
 import uniqid from 'uniqid'
+import { fetchJobs } from "../redux/actions/index.js"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 
-class SearchPage extends Component {
+const mapDispatchToProps = (dispatch) => ({
+    fetchJobs: (baseEndpoint, query) => dispatch(fetchJobs(baseEndpoint, query)),
+  });
 
-    state = {
-        query: '',
-        jobs: []
+const SearchPage = () => {
+    const [query, setQuery] = useState('')
+    const [jobs, setJobs] = useState([])
+    const [selectedJob, setSelectedJob] = useState([])
+    const params = useParams()
+    
+  const getJobs = async () => {
+    try {
+      const response = await fetch(baseEndpoint + query)
+      const { data } = await response.json()
+      
+      setJobs(data)
+      console.log("jobs: ", data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    setSelectedJob(selectedJob)
+    console.log(selectedJob)
+  }, [selectedJob])
+
+    // state = {
+    //     query: '',
+    //     jobs: []
+    // }
+
+    const baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
+
+
+    const handleChange = (e) => {
+        setQuery(e.target.value)
+        console.log(query)
     }
 
-    baseEndpoint = 'https://strive-jobs-api.herokuapp.com/jobs?search='
-
-
-    handleChange = (e) => {
-        this.setState({ query: e.target.value })
-    }
-
-    handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const response = await fetch(this.baseEndpoint + this.state.query + '&limit=20')
-
-        if (!response.ok) {
-            alert('Error fetching results')
-            return
-        }
-
-        const { data } = await response.json()
-
-        this.setState({ jobs: data })
-
+        getJobs()
+        console.log(jobs)
     }
 
-    render() {
+
         return (
             <Container>
                 <Row>
@@ -41,19 +61,18 @@ class SearchPage extends Component {
                         <h1>Remote Jobs Search</h1>
                     </Col>
                     <Col xs={10} className='mx-auto'>
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Control type="search" value={this.state.query} onChange={this.handleChange} placeholder="Type and press enter" />
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Control type="search" onChange={handleChange} value={query} placeholder="Type and press enter" />
                         </Form>
                     </Col>
                     <Col xs={10} className='mx-auto mb-5'>
                         {
-                            this.state.jobs.map(jobData => <Job key={uniqid()} data={jobData} />)
+                            jobs.map((jobs) =>( <Job key={uniqid()} onChange={handleChange} data={jobs} />))
                         }
                     </Col>
                 </Row>
             </Container>
         )
     }
-}
 
 export default SearchPage

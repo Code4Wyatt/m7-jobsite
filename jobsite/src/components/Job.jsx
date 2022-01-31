@@ -1,11 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, Button } from 'react-bootstrap'
 import { addToFavouritesAction } from '../redux/actions/index.js'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux"
 
-const mapStateToProps = state => ({
-  username: state.user.username
-})
+
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavourites: (company) => {
@@ -13,7 +11,14 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-const Job = ({ data, addToFavourites, company }) => {
+const Job = ({ data, addToFavourites }) => {
+  const [job, setJob] = useState([])
+  const [selected, setSelected] = useState(false)
+  const jobData = useSelector(state => state.jobs.elements)
+  const favourited = useSelector(state => state.favourites.elements)
+
+  const dispatch = useDispatch()
+
   return(
     <Card style={{ width: '18rem' }}>
     <Card.Body>
@@ -23,11 +28,10 @@ const Job = ({ data, addToFavourites, company }) => {
       {data.publication_date}
       </Card.Text>
       <Card.Text href="#">{data.candidate_required_location}</Card.Text>
-      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => {addToFavourites(data)}} className="ml-5" variant="primary">✰</Button>
+      <Card.Link href="/:job">View Job</Card.Link><Button onClick={() => dispatch(addToFavouritesAction(data))} className="ml-5" variant="primary">✰</Button>
     </Card.Body>
-  </Card>
-      
- )
+  </Card> 
+  )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Job)
+export default Job

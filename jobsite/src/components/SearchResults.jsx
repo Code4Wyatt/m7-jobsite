@@ -4,13 +4,17 @@ import { useState, useEffect } from "react"
 import { Container, Row, Col } from "react-bootstrap"
 import uniqid from "uniqid"
 import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+// const mapStateToProps = (s) => s
 
-
+// const mapDispatchToProps = (dispatch) => ({
+//   addToFavourites: (job) => dispatch(addToFav(job)),
+//   removeFromFavourites: (job) => dispatch(removeFromFav)
+// })
 const SearchResults = () => {
   const [jobs, setJobs] = useState([])
   const params = useParams()
-
-  
+  const dispatch = useDispatch()
 
   const getJobs = async () => {
     try {

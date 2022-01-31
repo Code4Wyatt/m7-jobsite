@@ -17,8 +17,8 @@ export const fetchJobs = (url, query) => {
         try {
             let resp = await fetch(url + query + '$limit=30')
             if (resp.ok) {
-                const { datat } = await resp.json()
-                dispath({
+                const { data } = await resp.json()
+                dispatch({
                     type: "FETCH_JOBS",
                     payload: data,
                 });
