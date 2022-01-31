@@ -1,0 +1,9 @@
+li:hover {
+    background-color: blue;
+    justify-content: space-between;
+}
+
+span {
+    margin-left: 10px;
+    margin-right: 20px;
+}

@@ -6,9 +6,9 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchJobs: (baseEndpoint, query) => dispatch(fetchJobs(baseEndpoint, query)),
-  });
+// const mapDispatchToProps = (dispatch) => ({
+//     fetchJobs: (baseEndpoint, query) => dispatch(fetchJobs(baseEndpoint, query)),
+//   });
 
 const SearchPage = () => {
     const [query, setQuery] = useState('')

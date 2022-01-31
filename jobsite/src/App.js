@@ -5,11 +5,11 @@ import Favourites from "./components/Favourites"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Provider } from "react-redux"
-import store from "../src/redux/store/index.js";
+import { configureStore } from "../src/redux/store/index.js";
 
 function App () {
   return (
-    <Provider store={store}>
+    <Provider store={configureStore}>
     <BrowserRouter>
      
        <NavBar /> 
